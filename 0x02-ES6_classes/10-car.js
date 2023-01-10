@@ -10,6 +10,6 @@ export default class Car {
       _brand: undefined,
       _motor: undefined,
       _color: undefined,
-   });
+    });
   }
 }
