@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Complex types - list of floats"""
-from typing import List, Union
+from typing import List, Callable
 
 
-def make_multiplier(multiplier: float) -> callable:
+def make_multiplier(multiplier: float) -> Callable[[float], float]:
     """Returns a function that multiplies a float by multiplier
     Args:
         multiplier (float): multiplier
