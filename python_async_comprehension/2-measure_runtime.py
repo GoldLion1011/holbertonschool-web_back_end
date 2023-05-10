@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Async Comprehensions """
 import asyncio
 import random
 from typing import Generator, List
