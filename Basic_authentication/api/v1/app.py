@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask import Flask, jsonify
 from flask_cors import (CORS, cross_origin)
 import os
-
+from flask import abort, request
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -43,8 +43,8 @@ def not_found(error) -> str:
 def before_request():
     """ Filters request to error handlers"""
     authList = ['/api/v1/status/',
-                      '/api/v1/unauthorized/',
-                      '/api/v1/forbidden/']
+                '/api/v1/unauthorized/',
+                '/api/v1/forbidden/']
     if auth and auth.require_auth(request.path, authList):
         if auth.authorization_header(request) is None:
             abort(401)
