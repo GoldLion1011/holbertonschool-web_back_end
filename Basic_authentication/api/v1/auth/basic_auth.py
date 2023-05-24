@@ -23,9 +23,6 @@ class BasicAuth(Auth):
                                            str) -> str:
         """ Method that returns decoded value of
             base64_authorization_header """
-        # if base64_authorization_header is None or type(
-                # base64_authorization_header) is not str:
-            # return None
         try:
             return b64decode(base64_authorization_header).decode('utf-8')
         except Exception:
