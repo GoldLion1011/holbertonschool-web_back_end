@@ -28,6 +28,12 @@ def login():
     user = user[0]
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
+
+    # New code: GET /api/v1/users/me
+    me_route = request.environ['PATH_INFO'] == '/api/v1/users/me'
+    if me_route:
+        return jsonify(user.to_json())
+
     from api.v1.app import auth
     session_id = auth.create_session(user.id)
     SESSION_NAME = getenv('SESSION_NAME')
