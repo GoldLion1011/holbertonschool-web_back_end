@@ -40,9 +40,9 @@ class DB:
         """ Takes in arbitrary keyword arguments and returns the first row
             found in the users table as filtered by the method’s input
             arguments """
-        if not kwargs:
+        try:
+            return self._session.query(User).filter_by(**kwargs).one()
+        except InvalidRequestError:
             raise InvalidRequestError
-        row = self._session.query(User).filter_by(**kwargs).first()
-        if row is None:
+        except NoResultFound:
             raise NoResultFound
-        return row
