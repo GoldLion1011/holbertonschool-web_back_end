@@ -74,6 +74,7 @@ def get_reset_password_token():
     except ValueError:
         abort(403)
 
+
 @app.route("/update_password", methods=["PUT"])
 def update_password():
     """ Update password route """
