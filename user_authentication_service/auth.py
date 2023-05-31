@@ -38,6 +38,6 @@ def _hash_password(password: str) -> str:
     return hashpw(password.encode(), gensalt())
 
 
-def _generate_uuid(self) -> str:
+def _generate_uuid() -> str:
     """ Generate a UUID """
     return str(uuid.uuid4())
