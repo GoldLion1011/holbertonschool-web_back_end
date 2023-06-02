@@ -2,12 +2,12 @@
 """ Unittests and integration tests for utils.py """
 
 import unittest
-from unittest import TestCase
-import parameterized
+from unittest.mock import patch, Mock
+from parameterized import parameterized
 from utils import access_nested_map, get_json, memoize
 
 
-class TestAccessNestedMap(TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """ TestAccessNestedMap Class """
 
     @parameterized.expand([
