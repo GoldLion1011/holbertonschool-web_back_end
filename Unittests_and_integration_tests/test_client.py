@@ -25,6 +25,15 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(test_class.org, mock_get_json.return_value)
         mock_get_json.assert_called_once()
 
+    @patch('client.get_json')
+    def test_public_repos_url(self):
+        """ Test _public_repos_url method """
+        test_org_name = "test"
+        test_class = GithubOrgClient(test_org_name)
+        test_class.org = {"repos_url": "test_url"}
+        self.assertEqual(test_class._public_repos_url,
+                         test_class.org["repos_url"])
+
     # @classmethod
     # def setUpClass(cls):
     #     """ setUpClass method """
