@@ -26,6 +26,14 @@ class Config:
 app.config.from_object(Config)
 
 
+def get_user():
+    """ get user """
+    user_id = request.args.get('login_as')
+    if user_id and int(user_id) in users:
+        return users[int(user_id)]
+    return None
+
+
 @babel.localeselector
 def get_locale():
     """ get locale """
@@ -33,13 +41,6 @@ def get_locale():
     if locale and locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-def get_user(login_as):
-    """ get user """
-    if login_as in users:
-        return users.get(login_as)
-    return None
 
 
 @app.before_request
