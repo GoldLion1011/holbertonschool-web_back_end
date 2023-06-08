@@ -29,15 +29,15 @@ app.config.from_object(Config)
 
 
 def get_user():
-    """ get user """
-    user_id = request.args.get('login_as')
-    if user_id and int(user_id) in users:
-        return users[int(user_id)]
+    """ Returns a user dictionary or None """
+    user_id = request.args.get("login_as")
+    if user_id:
+        return users.get(int(user_id))
     return None
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """ users preferred locale """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -55,7 +55,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """ users preferred timezone """
     timezone = request.args.get('timezone')
     if timezone:
@@ -76,19 +76,14 @@ def get_timezone():
 
 @app.before_request
 def before_request():
-    """ before request """
-    user = get_user(request.args.get('login_as'))
-    if user:
-        g.user = user
-    else:
-        g.user = None
+    """ Sets a user as a global on flask.g.user """
+    g.user = get_user()
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
     """ Index page """
     return render_template('7-index.html')
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, threaded=True, debug=True)
