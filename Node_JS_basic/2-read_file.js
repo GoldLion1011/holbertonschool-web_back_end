@@ -1,3 +1,5 @@
+// creates a function to count students in a database file
+
 const fs = require('fs');
 
 function countStudents(path) {
