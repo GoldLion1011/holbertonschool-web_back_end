@@ -1,32 +1,43 @@
-// create a function to count students in a file
-
 const fs = require('fs');
 
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n');
-    let count = 0;
-    let fields;
-    const dict = {};
-    for (const i in lines) {
-      if (lines[i]) {
-        count += 1;
-        fields = lines[i].split(',');
-        if (!dict[fields[3]]) {
-          dict[fields[3]] = [];
-        }
-        dict[fields[3]].push(fields[0]);
-      }
+    const lines = data.trim().split('\n');
+
+    if (lines.length === 0) {
+      throw new Error('Cannot load the database');
     }
-    console.log(`Number of students: ${count}`);
-    for (const key in dict) {
-      if (key) {
-        const list = dict[key];
-        console.log(`Number of students in ${key}: ${list.length}. List: ${list.toString().replace(/,/g, ', ')}`);
+
+    const students = lines.map((line) => line.split(','))
+      .filter((student) => student.length === 4 && student.every((field) => field.trim() !== ''))
+      .map((student) => ({
+        firstName: student[0].trim(),
+        lastName: student[1].trim(),
+        age: parseInt(student[2].trim()),
+        field: student[3].trim(),
+      }));
+
+    const fieldCounts = {};
+    students.forEach((student) => {
+      if (!fieldCounts[student.field]) {
+        fieldCounts[student.field] = {
+          count: 0,
+          names: [],
+        };
       }
-    }
-  } catch (err) {
-    throw new Error('Cannot load the database');
+      fieldCounts[student.field].count++;
+      fieldCounts[student.field].names.push(student.firstName);
+    });
+
+    console.log(`Number of students: ${students.length}`);
+    Object.entries(fieldCounts).forEach(([field, { count, names }]) => {
+      console.log(`Number of students in ${field}: ${count}. List: ${names.join(', ')}`);
+    });
+  } catch (error) {
+    console.error(error.message);
   }
 }
+
+// Usage example
+countStudents('path/to/database.csv');
