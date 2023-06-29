@@ -1,20 +1,20 @@
 const assert = require('assert');
-const calculateNumber = require('./0-calcul.js').default;
+const calculateNumber = require('./0-calcul.js');
 
 describe('calculateNumber', () => {
-  it('calculate the sum of paramneter a rounded', () => {
+  it('first number rounded', () => {
     assert.strictEqual(2 + 2, 4);
     assert.strictEqual(2 + 3.5, 5.5);
     assert.strictEqual(2 + 0, 2);
   });
 
-  it('calculate the sum of paramneter b rounded', () => {
+  it('second number rounded', () => {
     assert.strictEqual(2 + 2, 4);
     assert.strictEqual(2.5 + 3, 5.5);
     assert.strictEqual(2 + 0, 2);
   });
 
-  it('calculate the sum of two rounded nums', () => {
+  it('both numbers rounded', () => {
     assert.strictEqual(2 + 3, 5);
     assert.strictEqual(2.5 + 3, 5.5);
     assert.strictEqual(2.5 + 3.5, 6);
