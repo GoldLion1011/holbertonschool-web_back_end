@@ -1,5 +1,5 @@
 const assert = require('assert');
-const calculateNumber = require('./0-calcul.js');
+const calculateNumber = require('./0-calcul.js').default;
 
 describe('calculateNumber', () => {
   it('calculate the sum of paramneter a rounded', () => {
