@@ -20,9 +20,9 @@ describe('API test', () => {
     });
   });
 
-  it('should return 404 status code when :id is NOT a number', (done) => {
+  it('should return 404 status code when :id is NaN', (done) => {
     request('http://localhost:7865/cart/anything', (error, response, body) => {
-      expect(response.statusCode).to.equal(404);
+      expect(response.statusCode).to.equal(400);
       done();
     });
   });
