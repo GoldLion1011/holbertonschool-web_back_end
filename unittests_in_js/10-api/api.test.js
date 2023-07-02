@@ -34,4 +34,17 @@ describe('API test', () => {
       done();
     });
   });
+
+  it('tests the POST /login route', (done) => {
+    request.post({
+      url: 'http://localhost:7865/login',
+      form: {
+        userName: 'Betty',
+      },
+    }, (error, response, body) => {
+      expect(response.statusCode).to.equal(200);
+      expect(body).to.equal('Welcome Betty');
+      done();
+    });
+  });
 });
