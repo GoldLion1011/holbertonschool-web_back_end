@@ -12,11 +12,11 @@ app.listen(port, () => {
   console.log(`API available on localhost port ${port}`);
 });
 
-app.get('/cart/:id([0-9]*)', (req, res) => {
+app.get('/cart/:id', (req, res) => {
   const cartId = req.params.id;
 
   if (isNaN(cartId)) {
-    res.status(400).send('Invalid cart ID. Cart ID must be a number.');
+    res.status(404).send('Invalid cart ID. Cart ID must be a number.');
   } else {
     res.send(`Payment methods for cart ${cartId}`);
   }
