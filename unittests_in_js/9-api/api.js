@@ -12,7 +12,7 @@ app.listen(port, () => {
   console.log(`API available on localhost port ${port}`);
 });
 
-app.get('/cart/:id', (req, res) => {
+app.get('/cart/:id([0-9]*)', (req, res) => {
   const cartId = req.params.id;
 
   if (isNaN(cartId)) {
