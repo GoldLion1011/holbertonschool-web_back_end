@@ -1,4 +1,4 @@
-// 
+// Connect Redis server to Node and log a status msg
 
 require('@babel/register');
 
@@ -12,5 +12,3 @@ client.on('connect', () => {
 client.on('error', (err) => {
   console.log(`Redis client not connected to the server: ${err.message}`);
 });
-
-
