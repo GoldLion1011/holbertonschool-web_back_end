@@ -1,4 +1,4 @@
-// 
+// Still more fun with Kue :p
 
 const kue = require('kue');
 const queue = kue.createQueue();
